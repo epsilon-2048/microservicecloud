@@ -1,5 +1,6 @@
 server:
   port: 8001
+
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml      # mybatis配置文件所在路径
   type-aliases-package: com.atguigu.springcloud.entities  # 所有Entity别名类所在包
@@ -7,7 +8,7 @@ mybatis:
 
 spring:
   application:
-    name: microservicecloud-dept                          # 名字 在微服务中很重要
+    name: microservicecloud-dept      # 重要 为eureka定位                        # 名字 在微服务中很重要
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource          # 当前数据库操作类型
     driver-class-name: com.mysql.jdbc.Driver              # 驱动包
@@ -18,3 +19,19 @@ spring:
       min-idle: 5                                          # 最小连接数
       initial-size: 5                                      # 初始化连接数
       max-total: 5                                         # 最大连接数
+
+# 修改部分 将此服务修改为eureka客户端
+eureka:
+  client: #客户端注册进eureka服务列表
+    service-url:
+      defaultZone: http://localhost:7001/eureka  # 服务端地址
+# 注册微服务信息完善
+  instance:
+    instance-id: microservicecloud-dept8001   # 服务名称的修改
+    prefer-ip-address: true     # 访问路径显示ip地址
+# eureka info 信息 需要依赖actuator，和在父pom中配置
+info:
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

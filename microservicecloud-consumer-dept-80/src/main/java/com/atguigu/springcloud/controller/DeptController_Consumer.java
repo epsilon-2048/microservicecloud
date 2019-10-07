@@ -17,7 +17,7 @@ public class DeptController_Consumer {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String REST_URL_PREFIX = "http://localhost:8001";//写死在这里?感觉怪怪的？后期应该用注册与发现：euraka
+    private static final String REST_URL_PREFIX = "http://localhost:8001";//写死在这里?感觉怪怪的？
 
     @RequestMapping(value = "/consumer/dept/add", method = RequestMethod.POST)
     public boolean add(Dept dept){
@@ -32,5 +32,12 @@ public class DeptController_Consumer {
     @RequestMapping(value = "/consumer/dept/list", method = RequestMethod.GET)
     public List<Dept> deptList(){
         return restTemplate.getForObject(REST_URL_PREFIX + "/dept/list" , List.class);
+    }
+
+    //eureka-服务发现
+
+    @RequestMapping(value = "/consumer/dept/discovery", method = RequestMethod.GET)
+    public Object discovery(){
+        return restTemplate.getForObject(REST_URL_PREFIX + "/dept/discovery", Object.class);
     }
 }

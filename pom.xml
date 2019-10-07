@@ -11,6 +11,7 @@
         <module>microservicecloud-api</module>
         <module>microservicecloud-provider-dept-8001</module>
         <module>microservicecloud-consumer-dept-80</module>
+        <module>microservicecloud-eureka-7001</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -80,4 +81,27 @@
 
     </dependencyManagement>
 
+    <build><!--为eureka微服务的info信息或其他做准备-->
+        <finalName>microservicecloud</finalName>
+        <resources>
+            <!-- 允许访问所有工程的src/main/resources下的文件-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <!--这个插件负责解析和解读-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <!--配置为能够读取src/main/resources下的文件中的以$开始$结束的数据-->
+                    <delimiters>
+                        <delimit>$</delimit>
+                    </delimiters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
