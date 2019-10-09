@@ -17,7 +17,9 @@ public class DeptController_Consumer {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String REST_URL_PREFIX = "http://localhost:8001";//写死在这里?感觉怪怪的？
+   // private static final String REST_URL_PREFIX = "http://localhost:8001";//写死在这里?感觉怪怪的？应该后期使用feign服务实例
+   private static final String REST_URL_PREFIX = "http://MICROSERVICECLOUD-DEPT";
+
 
     @RequestMapping(value = "/consumer/dept/add", method = RequestMethod.POST)
     public boolean add(Dept dept){

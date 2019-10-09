@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8003
 
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml      # mybatis配置文件所在路径
@@ -8,10 +8,11 @@ mybatis:
 
 spring:
   application:
-    name: microservicecloud-dept      # 重要 为eureka定位                        # 名字 在微服务中很重要
+    name: microservicecloud-dept      # 重要 为eureka定位     # 为什么这里name一样，因为他是多个服务实现一个业务功能                   # 名字 在微服务中很重要
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource          # 当前数据库操作类型
     driver-class-name: com.mysql.jdbc.Driver              # 驱动包
+    # 可以一个微服务一个独立数据库，但我没实现
     url: jdbc:mysql://localhost:3306/springcloudDB?characterEncoding=utf8&serverTimezone=GMT%2b8&useSSL=false&allowMultiQueries=true
     username: root
     password: chen
@@ -30,7 +31,7 @@ eureka:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
 # 注册微服务信息完善
   instance:
-    instance-id: microservicecloud-dept8001   # 服务名称的修改
+    instance-id: microservicecloud-dept8003   # 服务名称的修改
     prefer-ip-address: true     # 访问路径显示ip地址
 # eureka info 信息 需要依赖actuator，和在父pom中配置
 info:
