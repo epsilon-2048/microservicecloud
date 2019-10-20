@@ -26,7 +26,7 @@ public class DeptController {
     }
     @RequestMapping(value = "/dept/list", method = RequestMethod.GET)
     public List<Dept> deptList(){
-        System.out.println("controller层");
+        System.out.println("8002:controller层");
         return deptService.DeptList();
     }
 
