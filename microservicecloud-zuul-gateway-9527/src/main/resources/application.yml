@@ -1,0 +1,49 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: microservicecloud-zuul-gateway      # 重要 为eureka定位                        # 名字 在微服务中很重要
+    # 最大连接数
+
+# 修改部分 将此服务修改为eureka客户端
+eureka:
+  client: #客户端注册进eureka服务列表
+    service-url:
+      #单机
+      #defaultZone: http://localhost:7001/eureka  # 服务端地址
+      #集群
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+# 注册微服务信息完善
+  instance:
+    instance-id: myzuul.com  # 服务名称的修改
+    prefer-ip-address: true     # 访问路径显示ip地址
+# eureka info 信息 需要依赖actuator，和在父pom中配置
+info:
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+zuul:
+  prefix: /api   # 路由前缀
+  ignored-services: "*"  # 多个， 忽略的应用，不暴露接口，即代理路径可用，真实路径不可以
+  #ignored-services: "microservicecloud-dept"  # 一个，不暴露接口，即代理路径可用，真实路径不可以
+  #路由分发，根据path映射url
+  routes:
+    #由eureka管理，映射到服务名，具体的实例由eureka提供（便于管理，因为一个服务可能有多个实例，负载均衡）
+    dept:
+      path: /dept/**
+      #url: microservicecloud-dept
+      serviceId: microservicecloud-dept #使用url也可以
+      #映射到具体的url（不能负载均衡）
+    deptip:
+      path: /deptip/**
+      url: http://localhost:8002/
+    #deptfeignip:
+    #  path: /deptfeignip/**
+    #  url: http://localhost:8080/consumer/
+      #设置路由规则
+      #输入url为localhost:5111/gwshop/**时,跳到服务名为demoshop的服务的对应的**url中
+      #例:localhost:5111/gwshop/get/info 则跳到名为demoshop服务的get/info接口中
+      #zuul.routes.shop.path=/gwshop/**
+      #zuul.routes.shop.url=demoshop
