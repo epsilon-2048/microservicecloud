@@ -1,0 +1,24 @@
+server:
+  port: 3344
+
+
+# 修改部分 将此服务修改为eureka客户端
+eureka:
+  client: #客户端注册进eureka服务列表
+    service-url:
+      #单机
+      #defaultZone: http://localhost:7001/eureka  # 服务端地址
+      #集群
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+# 注册微服务信息完善
+  instance:
+    instance-id: microservicecloud-config   # 服务名称的修改
+    prefer-ip-address: true     # 访问路径显示ip地址
+spring:
+  application:
+    name: microservicecloud-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/epsilon-2048/microservicecloudconfig.git
