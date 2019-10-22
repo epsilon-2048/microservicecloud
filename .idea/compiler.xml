@@ -11,6 +11,8 @@
         <module name="microservicecloud-provider-dept-8003" />
         <module name="microservicecloudapi" />
         <module name="microservicecloudcomsumerhystrixdashboard" />
+        <module name="microservicecloudconfig3344" />
+        <module name="microservicecloudconfigclient3355" />
         <module name="microservicecloudeureka7001" />
         <module name="microservicecloudeureka7002" />
         <module name="microservicecloudeureka7003" />
